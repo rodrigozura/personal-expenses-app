@@ -9,6 +9,7 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import axios from 'axios';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -19,7 +20,7 @@ export async function fetchRevenue() {
     // Don't do this in production :)
 
     // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
@@ -227,5 +228,90 @@ export async function getUser(email: string) {
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
+  }
+}
+
+
+export async function fetchExpenses() {
+
+  try {
+    const rest = await axios.get('http://localhost:8000/transaction')
+    
+    return rest.data
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoices.');
+  }
+}
+
+export async function fetchTypes() {
+
+  try {
+    const rest = await axios.get('http://localhost:8000/transaction_type')
+    
+    return rest.data
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch types of transactions.');
+  }
+}
+
+export async function fetchMainCategories() {
+
+  try {
+    const rest = await axios.get('http://localhost:8000/main_category')
+    
+    return rest.data
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch main categories.');
+  }
+}
+
+export async function fetchSubCategories() {
+
+  try {
+    const rest = await axios.get('http://localhost:8000/sub_category')
+    
+    return rest.data
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch sub categories.');
+  }
+}
+
+export async function fetchCurrencies() {
+
+  try {
+    const rest = await axios.get('http://localhost:8000/currency')
+    
+    return rest.data
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch currencies.');
+  }
+}
+
+export async function fetchPayMethods() {
+
+  try {
+    const rest = await axios.get('http://localhost:8000/pay_method')
+    
+    return rest.data
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch pay methods.');
+  }
+}
+
+export async function fetchWallets() {
+
+  try {
+    const rest = await axios.get('http://localhost:8000/wallet')
+    
+    return rest.data
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch wallets.');
   }
 }

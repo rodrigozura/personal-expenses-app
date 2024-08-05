@@ -21,6 +21,15 @@ export const formatDateToLocal = (
   return formatter.format(date);
 };
 
+export const formatDate = (
+  timestamp: number
+): string => {
+  const date = new Date(timestamp * 1000).toISOString();
+  const formatedDate = `${date.split("T")[0]} ${date.split("T")[1].split(".")[0]}`
+  
+  return formatedDate;
+};
+
 export const generateYAxis = (revenue: Revenue[]) => {
   // Calculate what labels we need to display on the y-axis
   // based on highest record and in 1000s
